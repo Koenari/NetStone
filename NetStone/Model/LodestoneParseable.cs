@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -7,17 +9,15 @@ using HtmlAgilityPack.CssSelectors.NetCore;
 using NetStone.Definitions;
 using NetStone.Definitions.Model;
 
-namespace NetStone.Model;
-
-/// <summary>
-/// Main superclass for parsed lodestone nodes.
-/// </summary>
-public abstract class LodestoneParseable
+namespace NetStone.Model
 {
     /// <summary>
-    /// The HTML document's root node.
+    /// Main superclass for parsed lodestone nodes.
     /// </summary>
-    protected readonly HtmlNode RootNode;
+    public abstract class LodestoneParseable
+    {
+        protected readonly HtmlNode RootNode;
+        protected readonly string _cssMateriaClass = "db-tooltip__materia";
 
     protected LodestoneParseable(){ }
     protected LodestoneParseable(HtmlNode rootNode)
@@ -102,18 +102,32 @@ public abstract class LodestoneParseable
         var regex = new Regex(pack.Regex);
         var match = regex.Match(text);
 
-        return match.Groups;
-    }
+            return match.Groups;
+        }
+
+        protected string ParseForMateria(DefinitionsPack pack)
+        {
+            var node = QueryNode(pack);
+
+            var text = !string.IsNullOrEmpty(node?.InnerHtml) ? HttpUtility.HtmlDecode(node?.InnerHtml) : null;
+            if (string.IsNullOrEmpty(text))
+                return null;
+
+            var regex = new Regex(pack.Regex);
+            var match = regex.Match(text);
+
+            return match.Groups[1].Value;
+        }
         
-    /// <summary>
-    /// Parse tooltip attribute.
-    /// </summary>
-    /// <param name="pack">Definition of the node.</param>
-    /// <returns>Parsed tooltip.</returns>
-    // TODO: Switch to attribute in pack
-    protected string ParseTooltip(DefinitionsPack pack)
-    {
-        var text = ParseAttribute(pack, "data-tooltip");
+        /// <summary>
+        /// Parse tooltip attribute.
+        /// </summary>
+        /// <param name="pack">Definition of the node.</param>
+        /// <returns>Parsed tooltip.</returns>
+        // TODO: Switch to attribute in pack
+        protected string ParseTooltip(DefinitionsPack pack)
+        {
+            var text = ParseAttribute(pack, "data-tooltip");
 
         return !string.IsNullOrEmpty(text) ? HttpUtility.HtmlDecode(text) : null;
     }

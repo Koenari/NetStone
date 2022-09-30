@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Web;
 using HtmlAgilityPack;
 using NetStone.Definitions.Model.Character;
 using NetStone.GameData;
@@ -47,18 +50,17 @@ public class GearEntry : LodestoneParseable, IOptionalParseable<GearEntry>
     //TODO: parse
     public string Stain => Parse(this.definition.Stain);
 
-    /// <summary>
-    /// Materia applied to this item.
-    /// </summary>
-    //TODO: parse
-    public string[] Materia => new[]
-    {
-        Parse(this.definition.Materia1),
-        Parse(this.definition.Materia2),
-        Parse(this.definition.Materia3),
-        Parse(this.definition.Materia4),
-        Parse(this.definition.Materia5),
-    };
+        /// <summary>
+        /// Materia applied to this item.
+        /// </summary>
+        public string[] Materia => new[]
+        {
+            ParseForMateria(this.definition.Materia1),
+            ParseForMateria(this.definition.Materia2),
+            ParseForMateria(this.definition.Materia3),
+            ParseForMateria(this.definition.Materia4),
+            ParseForMateria(this.definition.Materia5)
+        };
 
     /// <summary>
     /// Name of this item's crafter.

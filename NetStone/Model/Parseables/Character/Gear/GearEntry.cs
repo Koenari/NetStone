@@ -55,17 +55,18 @@ public class GearEntry : LodestoneParseable, IOptionalParseable<GearEntry>
         /// </summary>
         public string[] Materia => new[]
         {
-            ParseForMateria(this.definition.Materia1),
-            ParseForMateria(this.definition.Materia2),
-            ParseForMateria(this.definition.Materia3),
-            ParseForMateria(this.definition.Materia4),
-            ParseForMateria(this.definition.Materia5)
+            ParseDirectInnerText(this.definition.Materia1),
+            ParseDirectInnerText(this.definition.Materia2),
+            ParseDirectInnerText(this.definition.Materia3),
+            ParseDirectInnerText(this.definition.Materia4),
+            ParseDirectInnerText(this.definition.Materia5)
         };
 
-    /// <summary>
-    /// Name of this item's crafter.
-    /// </summary>
-    public string CreatorName => Parse(this.definition.CreatorName);
+
+        /// <summary>
+        /// Name of this item's crafter.
+        /// </summary>
+        public string CreatorName => Parse(this.definition.CreatorName);
 
     /// <summary>
     /// Indicating whether the item slot has an item equipped or not.

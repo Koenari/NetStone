@@ -105,18 +105,19 @@ namespace NetStone.Model
             return match.Groups;
         }
 
-        protected string ParseForMateria(DefinitionsPack pack)
+        /// <summary>
+        /// Parses the DirectInnerText via selector.
+        /// </summary>
+        /// <param name="pack">Definition of the node.</param>
+        /// <param name="noAttribute">Determines if Attributes are parsed or not.</param>
+        /// <returns></returns>
+        protected string ParseDirectInnerText(DefinitionsPack pack, bool noAttribute = false)
         {
             var node = QueryNode(pack);
 
-            var text = !string.IsNullOrEmpty(node?.InnerHtml) ? HttpUtility.HtmlDecode(node?.InnerHtml) : null;
-            if (string.IsNullOrEmpty(text))
-                return null;
+            var text = !string.IsNullOrEmpty(pack.Attribute) && !noAttribute ? ParseAttribute(pack) : node?.GetDirectInnerText();
 
-            var regex = new Regex(pack.Regex);
-            var match = regex.Match(text);
-
-            return match.Groups[1].Value;
+            return !string.IsNullOrEmpty(text) ? HttpUtility.HtmlDecode(text) : null;
         }
         
         /// <summary>

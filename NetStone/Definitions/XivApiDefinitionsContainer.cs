@@ -55,13 +55,10 @@ public class XivApiDefinitionsContainer : DefinitionsContainer
 
         // Remove every character in materia selector after <ul> to make a search after css classes for materia possible.
         // This is needed, because ``ul:nth-child(7)`` doesn't work if the item has been dyed.
-        // After that, fix regex because ``<br/>`` is apparently broken. ``<br>`` yields correct results.
         private void PatchCharacterGearDefinition()
         {
             var oldSelector = "ul:nth-child(7)";
             var newSelector = "ul.db-tooltip__materia";
-            var oldRegex = "<br/>";
-            var newRegex = "<br>";
 
             PatchAllMateriaSlots(this.Gear.Mainhand);
             PatchAllMateriaSlots(this.Gear.Offhand);
@@ -79,15 +76,10 @@ public class XivApiDefinitionsContainer : DefinitionsContainer
             void PatchAllMateriaSlots(GearEntryDefinition gearEntryDefinition)
             {
                 gearEntryDefinition.Materia1.Selector = gearEntryDefinition.Materia1.Selector.Replace(oldSelector, newSelector);
-                gearEntryDefinition.Materia1.PerlBasedRegex = gearEntryDefinition.Materia1.PerlBasedRegex.Replace(oldRegex, newRegex);
                 gearEntryDefinition.Materia2.Selector = gearEntryDefinition.Materia2.Selector.Replace(oldSelector, newSelector);
-                gearEntryDefinition.Materia2.PerlBasedRegex = gearEntryDefinition.Materia2.PerlBasedRegex.Replace(oldRegex, newRegex);
                 gearEntryDefinition.Materia3.Selector = gearEntryDefinition.Materia3.Selector.Replace(oldSelector, newSelector);
-                gearEntryDefinition.Materia3.PerlBasedRegex = gearEntryDefinition.Materia3.PerlBasedRegex.Replace(oldRegex, newRegex);
                 gearEntryDefinition.Materia4.Selector = gearEntryDefinition.Materia4.Selector.Replace(oldSelector, newSelector);
-                gearEntryDefinition.Materia4.PerlBasedRegex = gearEntryDefinition.Materia4.PerlBasedRegex.Replace(oldRegex, newRegex);
                 gearEntryDefinition.Materia5.Selector = gearEntryDefinition.Materia5.Selector.Replace(oldSelector, newSelector);
-                gearEntryDefinition.Materia5.PerlBasedRegex = gearEntryDefinition.Materia5.PerlBasedRegex.Replace(oldRegex, newRegex);
             }
         }
 

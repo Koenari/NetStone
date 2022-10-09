@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using HtmlAgilityPack.CssSelectors.NetCore;
 using NetStone.Definitions;
 using NetStone.Definitions.Model;
+using System;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
 
 namespace NetStone.Model;
 
@@ -20,9 +18,8 @@ public abstract class LodestoneParseable
     /// The HTML document's root node.
     /// </summary>
     protected readonly HtmlNode RootNode;
-    protected readonly string _cssMateriaClass = "db-tooltip__materia";
 
-    protected LodestoneParseable() { }
+    protected LodestoneParseable(){ }
     protected LodestoneParseable(HtmlNode rootNode)
     {
         this.RootNode = rootNode;

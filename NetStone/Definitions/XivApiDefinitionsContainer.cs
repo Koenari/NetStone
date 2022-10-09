@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using NetStone.Definitions.Model;
 using NetStone.Definitions.Model.Character;
@@ -30,7 +29,6 @@ public class XivApiDefinitionsContainer : DefinitionsContainer
         this.Character = await GetDefinition<CharacterDefinition>("profile/character.json");
         this.ClassJob = await GetDefinition<CharacterClassJobDefinition>("profile/classjob.json");
         this.Gear = await GetDefinition<CharacterGearDefinition>("profile/gearset.json");
-
         this.Attributes = await GetDefinition<CharacterAttributesDefinition>("profile/attributes.json");
         this.Achievement = await GetDefinition<PagedDefinition>("profile/achievements.json");
         this.Mount = await GetDefinition<CharacterMountDefinition>("profile/mount.json");

@@ -50,23 +50,22 @@ public class GearEntry : LodestoneParseable, IOptionalParseable<GearEntry>
     //TODO: parse
     public string Stain => Parse(this.definition.Stain);
 
-        /// <summary>
-        /// Materia applied to this item.
-        /// </summary>
-        public string[] Materia => new[]
-        {
-            ParseDirectInnerText(this.definition.Materia1),
-            ParseDirectInnerText(this.definition.Materia2),
-            ParseDirectInnerText(this.definition.Materia3),
-            ParseDirectInnerText(this.definition.Materia4),
-            ParseDirectInnerText(this.definition.Materia5)
-        };
+    /// <summary>
+    /// Materia applied to this item.
+    /// </summary>
+    public string[] Materia => new[]
+    {
+        ParseDirectInnerText(this.definition.Materia1),
+        ParseDirectInnerText(this.definition.Materia2),
+        ParseDirectInnerText(this.definition.Materia3),
+        ParseDirectInnerText(this.definition.Materia4),
+        ParseDirectInnerText(this.definition.Materia5)
+    };
 
-
-        /// <summary>
-        /// Name of this item's crafter.
-        /// </summary>
-        public string CreatorName => Parse(this.definition.CreatorName);
+    /// <summary>
+    /// Name of this item's crafter.
+    /// </summary>
+    public string CreatorName => Parse(this.definition.CreatorName);
 
     /// <summary>
     /// Indicating whether the item slot has an item equipped or not.

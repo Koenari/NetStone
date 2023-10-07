@@ -96,9 +96,9 @@ jobs:
     - name: Package
       run: dotnet pack --configuration Release --no-build
     - name: Push package NetStone
-      if: if: ${{needs.tag.outputs.result == 'pass'}}
+      if: ${{needs.tag.outputs.result == 'pass'}}
       run: dotnet nuget push "**/Release/NetStone.$EXPECTED_VERSION.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
     - name: Push package NetStone.GameData.Lumina
-      if: if: ${{needs.tag-lumina.outputs.result == 'pass'}}
+      if: ${{needs.tag-lumina.outputs.result == 'pass'}}
       run: dotnet nuget push "**/Release/NetStone.GameData.Lumina.$EXPECTED_LUMINA_VERSION.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
